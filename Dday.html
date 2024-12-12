@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function remaindTime() {
+    var now = new Date(); //현재시간을 구한다. 
+    var open = new Date(2025, 1, 20, 12, 0, 0);
+  
+    var nt = now.getTime(); // 현재의 시간만 가져온다
+    var ot = open.getTime(); // 오픈시간만 가져온다
+  
+   if(nt<ot){ //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+     sec = parseInt(ot - nt) / 1000;
+     days = parseInt(sec/(24*3600));
+     sec %= (24*3600);
+     hour = parseInt(sec/60/60);
+     sec = (sec - (hour*60*60));
+     min = parseInt(sec/60);
+     sec = parseInt(sec-(min*60));
+     
+     console.log(nt, sec, hour, sec, min, sec);
+  
+     if(hour<10){hour="0"+hour;}
+     if(min<10){min="0"+min;}
+     if(sec<10){sec="0"+sec;}
+     
+     
+     document.getElementById("day").innerHTML=days;
+     document.getElementById("hour").innerHTML=hour;
+     document.getElementById("minute").innerHTML=min;
+     document.getElementById("second").innerHTML=sec;
+//      $("#hour").html(hour);
+      $("#minute").html(min);
+      $("#second").html(sec);
+   } /*else{ //현재시간이 종료시간보다 크면
+    $("#hour").html('00');
+    $("#minute").html('00');
+    $("#second").html('00');
+   }*/
+  }
+  setInterval(remaindTime,1000);
+        </script>
+    </head>
+    <body>
+        <div class="dday">
+            <p>출발일</p>
+            <p>2025년 2월 20일 오후 12시</p>
+            <p>출발까지</p>
+            <div class="date">
+                <span id="day">00</span>
+                <span>일</span>
+                <span id="hour">00</span>
+                <span>시간</span>
+                <span id="minute">00</span>
+                <span>분</span>
+                <span id="second">00</span>
+                <span>초 남음</span>
+            </div>
+        </div>
+    </body>
+</html>
