@@ -2,60 +2,270 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
+        <style>
+
+            @font-face {
+                font-family: 'Pretendard-Regular';
+                src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            }
+
+            div {
+                margin: 0;
+                padding: 0;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            
+            p {
+                font-family: 'Pretendard-Regular';
+            }
+
+            #boardingpass{
+                display:flex;
+                width:800px;
+                height:300px;
+                background-color: white;
+                border-radius: 30px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 1.0, 0.3);
+            }
+
+            #boardingpassLeft{
+                float:left;
+            }
+
+            #boardingpassLine{
+                position:absolute;
+                width:480px;
+                height:300px;
+                left: 4px;
+                top: 13px;
+                z-index: 2;
+                border-width: 0 2px 0 0;
+                border-style: solid;
+                border-color: transparent;
+                border-image-source: repeating-linear-gradient(to bottom, #d8d8d8 0, #d8d8d8 10px, transparent 5px, transparent 20px);
+                border-image-slice: 1;
+            }
+
+            #boardingpassRight{
+                float:left;
+            }
+
+            #boardingpassLeftTop{
+                width: 480px;
+                height:70px;
+                border-top-left-radius: 30px;
+                background-color: #4D834B;
+            }
+
+            #boardingpassRightTop{
+                width: 320px;
+                height:70px;
+                border-top-right-radius: 30px;
+                background-color: #4D834B;
+            }
+
+            #boardingpassLeftMiddle {
+                background-color: white;
+                width: 480px;
+                height: 160px;
+            }
+
+            #boardingpassRightMiddle {
+                background-color: white;
+                width: 320px;
+                height:140px;
+            }
+
+            #middleLeft, #middleCenter, #middleRight{
+                float:left;
+                width: 160px;
+                height: fit-content;
+            }
+
+            #boardingpassLeftBottom{
+                background-color: white;
+                width: 480px;
+                height:70px;           
+                border-bottom-left-radius: 30px;
+            }
+
+            #boardingpassRightBottom{
+                background-color: white;
+                width:320px;
+                height: 90px;
+                text-align: center;
+                border-bottom-right-radius: 30px;
+            }
+
+            #subtext {
+                color: #4A4A4A;
+                font-size: 13px;
+                line-height: 1.0;
+                margin-left:6px;
+                margin-top: 17px;
+                margin-bottom: 2px;
+            }
+
+            span {
+                font-family: 'Pretendard-Regular';
+                color:#4D834B;
+                font-size:18px;
+                font-weight: 500;
+                margin-left: 1px;
+            }
+
+            #subtitletext {
+                color:white;
+                line-height: 38px;
+                text-align: center;
+                margin-top: 17px;
+                font-size:15px;
+            }
+
+            #titletext {
+                color:white;
+                text-align: center;
+                font-size:20px;
+                letter-spacing: 5px;
+                margin-top: 22.5px;
+            }
+
+            #sub{
+                color: #4A4A4A;
+                font-size:15px;
+                line-height: 1.0;
+                margin-top: 18px;
+                margin-bottom: 13px;
+                margin-left:2px;
+            }
+
+            #airport{
+                color:#4D834B;
+                font-size: 30px;
+                font-weight: 900;
+                line-height: 1.0;
+                margin-left:-5px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+
+            }
+
+            #subAirport{
+                color:#4D834B;
+                font-size:16px;
+                font-weight: 400;
+                line-height: 1.0;
+                margin-top:0px;
+                margin-left:1px;
+                margin-bottom: 0px;
+            }
+
+            #departTime{
+                color: #4A4A4A;
+                font-size:15px;
+                line-height: 1.3;
+                margin-left:3px;
+                margin-top: 13px;
+                margin-bottom: 0px;
+            }
+
+            #rightSub{
+                color: #4A4A4A;
+                font-size:10px;
+                line-height: 1.0;
+                margin-top: 15px;
+                margin-bottom: 1px;
+            }
+
+            #rightText{
+                color: #4D834B;
+                font-size:14px;
+            }
+
+        </style>
         <script>
             function remaindTime() {
-    var now = new Date(); //현재시간을 구한다. 
-    var open = new Date(2025, 1, 20, 12, 0, 0);
+                var now = new Date();
+                var open = new Date(2025, 1, 20, 12, 0, 0);
   
-    var nt = now.getTime(); // 현재의 시간만 가져온다
-    var ot = open.getTime(); // 오픈시간만 가져온다
+                var nt = now.getTime();
+                var ot = open.getTime();
   
-   if(nt<ot){ //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
-     sec = parseInt(ot - nt) / 1000;
-     days = parseInt(sec/(24*3600));
-     sec %= (24*3600);
-     hour = parseInt(sec/60/60);
-     sec = (sec - (hour*60*60));
-     min = parseInt(sec/60);
-     sec = parseInt(sec-(min*60));
-     
-     console.log(nt, sec, hour, sec, min, sec);
-  
-     if(hour<10){hour="0"+hour;}
-     if(min<10){min="0"+min;}
-     if(sec<10){sec="0"+sec;}
-     
-     
-     document.getElementById("day").innerHTML=days;
-     document.getElementById("hour").innerHTML=hour;
-     document.getElementById("minute").innerHTML=min;
-     document.getElementById("second").innerHTML=sec;
-//      $("#hour").html(hour);
-      $("#minute").html(min);
-      $("#second").html(sec);
-   } /*else{ //현재시간이 종료시간보다 크면
-    $("#hour").html('00');
-    $("#minute").html('00');
-    $("#second").html('00');
-   }*/
-  }
-  setInterval(remaindTime,1000);
+                if(nt<ot){
+                    sec = parseInt(ot - nt) / 1000;
+                    days = parseInt(sec/(24*3600));
+                    sec %= (24*3600);
+                    hour = parseInt(sec/60/60);
+                    sec = (sec - (hour*60*60));
+                    min = parseInt(sec/60);
+                    sec = parseInt(sec-(min*60));
+                
+                    console.log(nt, sec, hour, sec, min, sec);
+
+                    document.getElementById("day").innerHTML=days;
+                    document.getElementById("hour").innerHTML=hour;
+                    document.getElementById("minute").innerHTML=min;
+                    document.getElementById("second").innerHTML=sec;
+                }
+            }
+            
+            setInterval(remaindTime,1000);
         </script>
     </head>
     <body>
-        <div class="dday">
-            <p>출발일</p>
-            <p>2025년 2월 20일 오후 12시</p>
-            <p>출발까지</p>
-            <div class="date">
-                <span id="day">00</span>
-                <span>일</span>
-                <span id="hour">00</span>
-                <span>시간</span>
-                <span id="minute">00</span>
-                <span>분</span>
-                <span id="second">00</span>
-                <span>초 남음</span>
+        <div id="boardingpassLine"></div>
+        <div id="boardingpass">
+            <div id="boardingpassLeft">
+                <div id="boardingpassLeftTop">
+                    <p id="titletext">BOARDING PASS</p>
+                </div>
+                <div id="boardingpassLeftMiddle">
+                    <div id="middleLeft">
+                        <p id="sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM:</p>
+                        <p id="airport">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICN</p>
+                        <p id="subAirport">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INCHEON</p>
+                        <p id="departTime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feb 20, 2025<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;02:50 PM</p>
+                        <p style="color: #4D834B; margin-top: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;────────────────────</p>
+                    </div><div id="middleCenter">
+                        <p style="font-size:12px; letter-spacing: -3px; margin-top:73px; margin-left: -20px; text-align: center;">──────────▶</p>
+                        <p style="color: #4D834B; margin-top: 39px;"><br>────────────────────</p>                     
+                    </div><div id="middleRight">
+                        <p id="sub">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TO:</p>
+                        <p id="airport" style="margin-left: -2px;">&nbsp;&nbsp;&nbsp;NRT</p>
+                        <p id="subAirport">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NARITA</p>
+                        <p id="departTime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feb 20, 2025<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;05:15 PM</p>
+                        <p style="color: #4D834B; margin-top: 3px;">────────</p>
+                    </div>
+                </div>
+                <div id="boardingpassLeftBottom">
+                    <p id="subtext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Until departure</p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="day" style="margin-left:-2px">00</span>
+                    <span>DAY&nbsp;</span>
+                    <span id="hour">00</span>
+                    <span>HOUR&nbsp;</span>
+                    <span id="minute">00</span>
+                    <span>MINUTE&nbsp;</span>
+                    <span id="second">00</span>
+                    <span>SECONDS LEFT</span>
+                </div>
+            </div><div id="boardingpassRight">
+                <div id="boardingpassRightTop">
+                    <p id="subtitletext">CG Airlines</p>
+                </div>
+                <div id="boardingpassRightMiddle">
+                    <p style="font-size:20px; line-height: 1.0; margin-left: 2px; margin-top: 17px; margin-bottom: 0px; color: #4A4A4A;">&nbsp;&nbsp;&nbsp;&nbsp;Passenger</p>
+                    <p style="font-size:18px; line-height: 0.8; margin-top: 6px; margin-left: 4px; margin-bottom: 0px; color:#4D834B;">&nbsp;&nbsp;&nbsp;&nbsp;EUAK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CRESOL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUNJI</p>
+                    <p style="text-align: center; line-height: 0.8; letter-spacing: -0.7px; margin-top: 3px; margin-bottom: 3px; color:#4D834B;">──────────────────</p>
+                    <p id="rightSub" style="margin-left: -0.5px; margin-bottom: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boarding&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Depart</p>
+                    <span id="rightText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FEB 20</span><span id="rightText" style="margin-left: 0.5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;02:20 PM</span><span id="rightText" style="margin-left: 4px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;02:50 PM</span>
+                    <p style="text-align: center; line-height: 0.8; letter-spacing: -0.7px; margin-top: -3px; margin-bottom: 3px; color:#4D834B;">──────────────────</p>
+                </div>
+                <div id="boardingpassRightBottom">
+                    <img src="https://cdn.discordapp.com/attachments/1100696450951811133/1317572157127131206/image.png?ex=675f2c31&is=675ddab1&hm=ac54a71797ec7997e176c8ed322b248f0a372bacbcb7831671f14f7389d74227&" alt="KBS JAPAN TOUR" style="width:90%; height:90%; margin-top: -4px;">
+                </div>
             </div>
         </div>
     </body>
